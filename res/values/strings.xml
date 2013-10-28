@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="imageView_dummy_content_description">imageview content description</string>
+    <string name="app_name">MedAssist</string>
+    <string name="action_settings">Setting</string>
+    <string name="username">username</string>
+    <string name="password">password</string>
+    <string name="action_register">Register</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_main">MainActivity</string>
+
+</resources>
