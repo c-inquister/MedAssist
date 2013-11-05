@@ -25,8 +25,8 @@
         android:id="@+id/loginViewContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical" 
-        android:layout_marginTop="40dp">
+        android:layout_marginTop="40dp"
+        android:orientation="vertical" >
 
         <EditText
             android:id="@+id/et_username"
@@ -48,6 +48,7 @@
             android:layout_marginTop="20dp"
             android:ems="10"
             android:hint="@string/password"
+            android:imeOptions="actionDone"
             android:inputType="textPassword" />
 
         <Button
@@ -58,7 +59,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginTop="50dp"
-            android:background="@drawable/grey_border"
+            android:background="@android:drawable/dialog_holo_light_frame"
             android:gravity="center"
             android:onClick="onRegisterClick"
             android:text="@string/action_register" />

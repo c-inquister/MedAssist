@@ -3,11 +3,19 @@
 
     <string name="imageView_dummy_content_description">imageview content description</string>
     <string name="app_name">MedAssist</string>
+    <string name="app_description">MedAssist can help you in organizing your medication and prescription, periodically.</string>
     <string name="action_settings">Setting</string>
     <string name="username">username</string>
     <string name="password">password</string>
     <string name="action_register">Register</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_main">MainActivity</string>
+    <string name="update_profile">Update Profile</string>
+    <string name="text_or">Or</string>
+    <string name="search_for_doc">Search for doctor:</string>
+    <string name="doc_search_hint_text">headache, chest pain etc</string>
+    <string name="change">Change</string>
+    <string name="phone1">phone1</string>
+    <string name="phone2">phone2</string>
 
 </resources>
