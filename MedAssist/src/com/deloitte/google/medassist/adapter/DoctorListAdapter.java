@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.deloitte.google.medassist.R;
@@ -14,15 +15,16 @@ import com.deloitte.google.medassist.data.Doctor;
 
 public class DoctorListAdapter extends CustomBaseArrayAdapter<Doctor>{
 
-    DoctorCallButtonClickListener mListItemCallButtonClickListener;
+    DoctorClickListener mListItemClickListener;
 
-    public interface DoctorCallButtonClickListener {
+    public interface DoctorClickListener {
         public void onCallClicked(int position);
+        public void onItemClicked(int position);
     }
 
-    public DoctorListAdapter(Context context, List<Doctor> list, DoctorCallButtonClickListener listener) {
+    public DoctorListAdapter(Context context, List<Doctor> list, DoctorClickListener listener) {
         super(context, list);
-        mListItemCallButtonClickListener = listener;
+        mListItemClickListener = listener;
     }
 
     public DoctorListAdapter(Context context, int textViewResourceId, List<Doctor> list) {
@@ -38,6 +40,7 @@ public class DoctorListAdapter extends CustomBaseArrayAdapter<Doctor>{
             v = mInflater.inflate(R.layout.doctor_search_list_item, parent, false);
 
             viewHolder = new ViewHolder();
+            viewHolder.docitem = (RelativeLayout)v.findViewById(R.id.docitem);
             viewHolder.name = (TextView) v.findViewById(R.id.name);
             viewHolder.specialization = (TextView) v.findViewById(R.id.specialization);
             viewHolder.area = (TextView) v.findViewById(R.id.area);
@@ -56,8 +59,17 @@ public class DoctorListAdapter extends CustomBaseArrayAdapter<Doctor>{
 
             @Override
             public void onClick(View v) {
-                if(mListItemCallButtonClickListener!=null) {
-                    mListItemCallButtonClickListener.onCallClicked(position);
+                if(mListItemClickListener!=null) {
+                    mListItemClickListener.onCallClicked(position);
+                }
+            }
+        });
+        viewHolder.docitem.setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                if(mListItemClickListener!=null) {
+                    mListItemClickListener.onItemClicked(position);
                 }
             }
         });
@@ -65,6 +77,7 @@ public class DoctorListAdapter extends CustomBaseArrayAdapter<Doctor>{
     }
 
     static class ViewHolder {
+        RelativeLayout docitem;
         TextView name;
         TextView specialization;
         TextView area;

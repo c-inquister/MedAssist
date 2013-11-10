@@ -2,12 +2,14 @@ package com.deloitte.google.medassist.activity;
 
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
 import com.deloitte.google.medassist.R;
 import com.deloitte.google.medassist.data.Doctor;
+import com.deloitte.google.medassist.fragments.DoctorDetailsFragment;
 import com.deloitte.google.medassist.fragments.DoctorSearchFragment;
 import com.deloitte.google.medassist.fragments.PatientLandingPageOneFragment;
 
@@ -17,54 +19,59 @@ public class MainActivity extends FragmentActivity implements NavigationListener
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        //TODO Decide based on the some conditions which fragment to load
         showPatientFagrment();
     }
 
-    public void showPatientFagrment(){
+    /*
+     * Toggles the fragment with the new fragment
+     * 
+     * @addtobackstack determines if the fragments need to be added to the backstack or no.
+     */
+    private void showFragment(Fragment fragment, boolean addtobackstack) {
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
-
-        PatientLandingPageOneFragment pf = new PatientLandingPageOneFragment();
-
-        ft.replace(R.id.contentPane, pf);
-        ft.addToBackStack(null);
+        ft.replace(R.id.contentPane, fragment);
+        if(addtobackstack){
+            ft.addToBackStack(null);
+        }
         ft.commit();
-    }
-
-    public void showDoctorLandingFagrment(){
-        //empty
     }
 
     /*
      * NavigationListener method callbacks
      */
     @Override
+    public void showDoctorLandingFagrment() {
+        //empty
+    }
+
+    @Override
+    public void showPatientFagrment() {
+        PatientLandingPageOneFragment pf = new PatientLandingPageOneFragment();
+        showFragment(pf, false);
+    }
+
+    @Override
     public void showUpdateProfile() {
         //TODO show the update fragment.
+
     }
 
     @Override
     public void showSearchDoctors(String query) {
-        FragmentManager fm = getSupportFragmentManager();
-        FragmentTransaction ft = fm.beginTransaction();
-
-        Bundle bundle = new Bundle();
-        bundle.putString(DoctorSearchFragment.SEARCH_QUERY, query);
-
-        DoctorSearchFragment pf = new DoctorSearchFragment();
-        pf.setArguments(bundle);
-
-        ft.replace(R.id.contentPane, pf);
-        //ft.addToBackStack(null);
-        ft.commit();
+        showFragment(DoctorSearchFragment.getInstance(query), true);
     }
 
     @Override
     public void showDoctorDetails(Doctor doc) {
-
+        showFragment(DoctorDetailsFragment.getInstance(doc), true);
     }
-
-
 
 
 }

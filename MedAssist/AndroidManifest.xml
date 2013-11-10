@@ -17,6 +17,7 @@
             android:name="com.deloitte.google.medassist.activity.LoginActivity"
             android:label="@string/app_name"
             android:noHistory="true"
+            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Holo.Light.NoActionBar.Fullscreen" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,7 +27,8 @@
         </activity>
         <activity
             android:name="com.deloitte.google.medassist.activity.MainActivity"
-            android:label="@string/title_activity_main" >
+            android:label="@string/title_activity_main"
+            android:screenOrientation="portrait" >
         </activity>
     </application>
 

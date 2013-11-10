@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,11 +17,11 @@ import android.widget.ListView;
 import com.deloitte.google.medassist.R;
 import com.deloitte.google.medassist.activity.NavigationListener;
 import com.deloitte.google.medassist.adapter.DoctorListAdapter;
-import com.deloitte.google.medassist.adapter.DoctorListAdapter.DoctorCallButtonClickListener;
+import com.deloitte.google.medassist.adapter.DoctorListAdapter.DoctorClickListener;
 import com.deloitte.google.medassist.data.Doctor;
 
 @SuppressLint("ValidFragment")
-public class DoctorSearchFragment extends BaseAppFragment implements DoctorCallButtonClickListener{
+public class DoctorSearchFragment extends BaseAppFragment implements DoctorClickListener{
 
     public static final String SEARCH_QUERY = "search_query";
 
@@ -28,6 +29,16 @@ public class DoctorSearchFragment extends BaseAppFragment implements DoctorCallB
     ArrayList<Doctor> mDoctors;
     String mSearchQery;
     NavigationListener mNavListener;
+
+    public static Fragment getInstance(String searchQuery) {
+        Bundle bundle = new Bundle();
+        bundle.putString(DoctorSearchFragment.SEARCH_QUERY, searchQuery);
+
+        DoctorSearchFragment pf = new DoctorSearchFragment();
+        pf.setArguments(bundle);
+
+        return pf;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -49,6 +60,7 @@ public class DoctorSearchFragment extends BaseAppFragment implements DoctorCallB
 
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
+                showLog("onItemClick: " + position);
                 if(mNavListener != null){
                     mNavListener.showDoctorDetails(mDoctors.get(position));
                 }
@@ -105,6 +117,13 @@ public class DoctorSearchFragment extends BaseAppFragment implements DoctorCallB
         Doctor doc = mDoctors.get(position);
         //TODO initiate the call
         Log.d(TAG, doc.name);
+    }
+
+    @Override
+    public void onItemClicked(int position) {
+        if(mNavListener!=null){
+            mNavListener.showDoctorDetails(mDoctors.get(position));
+        }
     }
 
 
