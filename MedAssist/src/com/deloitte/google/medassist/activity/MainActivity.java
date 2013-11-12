@@ -1,6 +1,8 @@
 package com.deloitte.google.medassist.activity;
 
 
+import java.util.Calendar;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -9,9 +11,14 @@ import android.support.v4.app.FragmentTransaction;
 
 import com.deloitte.google.medassist.R;
 import com.deloitte.google.medassist.data.Doctor;
+import com.deloitte.google.medassist.fragments.AddAppointmentFragment;
+import com.deloitte.google.medassist.fragments.DateDialogFragment;
+import com.deloitte.google.medassist.fragments.DateDialogFragment.DateDialogFragmentListener;
 import com.deloitte.google.medassist.fragments.DoctorDetailsFragment;
 import com.deloitte.google.medassist.fragments.DoctorSearchFragment;
 import com.deloitte.google.medassist.fragments.PatientLandingPageOneFragment;
+import com.deloitte.google.medassist.fragments.TimePickerFragment;
+import com.deloitte.google.medassist.fragments.TimePickerFragment.TimePickedListener;
 
 public class MainActivity extends FragmentActivity implements NavigationListener {
 
@@ -72,6 +79,22 @@ public class MainActivity extends FragmentActivity implements NavigationListener
     public void showDoctorDetails(Doctor doc) {
         showFragment(DoctorDetailsFragment.getInstance(doc), true);
     }
+
+    @Override
+    public void addAppointment(Doctor doc) {
+        showFragment(AddAppointmentFragment.getInstance(doc), true);
+    }
+
+    @Override
+    public void showDatePicker(DateDialogFragmentListener listener, Calendar now) {
+        showFragment(DateDialogFragment.newInstance(this, listener, now), false);
+    }
+
+    @Override
+    public void showTimePicker(TimePickedListener listener, Calendar now) {
+        showFragment(TimePickerFragment.newInstance(listener, now), false);
+    }
+
 
 
 }

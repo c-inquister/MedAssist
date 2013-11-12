@@ -3,7 +3,6 @@ package com.deloitte.google.medassist.fragments;
 import java.util.ArrayList;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -15,7 +14,6 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 import com.deloitte.google.medassist.R;
-import com.deloitte.google.medassist.activity.NavigationListener;
 import com.deloitte.google.medassist.adapter.DoctorListAdapter;
 import com.deloitte.google.medassist.adapter.DoctorListAdapter.DoctorClickListener;
 import com.deloitte.google.medassist.data.Doctor;
@@ -28,7 +26,6 @@ public class DoctorSearchFragment extends BaseAppFragment implements DoctorClick
     ListView docSearchListView;
     ArrayList<Doctor> mDoctors;
     String mSearchQery;
-    NavigationListener mNavListener;
 
     public static Fragment getInstance(String searchQuery) {
         Bundle bundle = new Bundle();
@@ -71,16 +68,7 @@ public class DoctorSearchFragment extends BaseAppFragment implements DoctorClick
         super.onViewCreated(view, savedInstanceState);
     }
 
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        if (activity instanceof NavigationListener) {
-            mNavListener = (NavigationListener) activity;
-        }
-        else {
-            throw new IllegalStateException(activity.getClass().getName() + " does not implement NavigationListener");
-        }
-    }
+
 
     @Override
     public void onDestroyView() {

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
@@ -69,6 +70,13 @@ public class DoctorDetailsFragment extends BaseAppFragment {
         mAddress.setText(mDoctor.address);
         mTimmings.setText("Timmings: "+mDoctor.timings);
         mSpecialization.setText(mDoctor.specialisation);
+        mAppointment.setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                mNavListener.addAppointment(mDoctor);
+            }
+        });
     }
 
     @Override

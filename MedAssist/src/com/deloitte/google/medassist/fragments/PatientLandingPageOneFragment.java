@@ -1,6 +1,5 @@
 package com.deloitte.google.medassist.fragments;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -15,7 +14,6 @@ import android.widget.TextView.OnEditorActionListener;
 import android.widget.Toast;
 
 import com.deloitte.google.medassist.R;
-import com.deloitte.google.medassist.activity.NavigationListener;
 import com.deloitte.google.medassist.utils.ApplicationUtils;
 import com.deloitte.google.medassist.utils.StringUtils;
 
@@ -24,8 +22,6 @@ public class PatientLandingPageOneFragment extends BaseAppFragment {
     Button btnUpdateProfile;
     Button btnChange;
     EditText etSearch;
-
-    NavigationListener mNavListener;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -36,17 +32,6 @@ public class PatientLandingPageOneFragment extends BaseAppFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.patient_landing_page_one, container, false);
-    }
-
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        if (activity instanceof NavigationListener) {
-            mNavListener = (NavigationListener) activity;
-        }
-        else {
-            throw new IllegalStateException(activity.getClass().getName() + " does not implement NavigationListener");
-        }
     }
 
     @Override
